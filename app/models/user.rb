@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+class User < ActiveRecord::Base
+  extend Devise::Models
+  has_many :user_league_rankings
+  has_many :leagues, through: :user_league_rankings
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  include DeviseTokenAuth::Concerns::User
+end
